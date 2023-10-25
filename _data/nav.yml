@@ -1,0 +1,13 @@
+list:
+  - title: Home
+    url: ""
+  - title: Blog
+    url: ""
+  - title: MachinesHTB
+    url: "hackthebox/"
+  - title: Research
+    url: "research/"
+  - title: Project
+    url: ""
+  - title: About
+    url: about

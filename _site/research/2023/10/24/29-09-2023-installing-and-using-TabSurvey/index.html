@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ngoc-Truong Nguyen | [Tutorial] Instructions for installing and using TabSurvey to run baseline models on new dataset.</title>
+  <script src="https://kit.fontawesome.com/faef595a2d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/mark.css" />
+  <link rel="stylesheet" href="/assets/css/custom.css" />
+  <!-- PILL JS LOADER SYLE -->
+  <style>
+    #indicator {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      display: none;
+      background-color: #72b6b5;
+    }
+
+    .is-loading {
+      display: block;
+      animation: blink 1.5s linear infinite;
+    }
+
+    @keyframes blink {
+      from,
+      to {
+        background-color: #72b6b5;
+      }
+
+      50% {
+        background-color: #42b983;
+      }
+    }
+
+    #project-link {
+      display: block;
+      position: fixed;
+      padding: 8px;
+      top: 0;
+      right: 0;
+    }
+  </style>
+  <!-- PILL JS -->
+  <script src="/assets/js/pill.min.js"></script>
+  <script>
+    // this is for pill js as the normal link wont work
+    function openLink(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+</head>
+
+  <body>
+    <div id="indicator"></div>
+    <div id="page">
+      <style>
+        .title {
+          padding: 10%;
+          color: #101417;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          background: #f78e66;
+          display: grid;
+        }
+        .meta {
+          /* font-size: 0.7rem; */
+          font-weight: normal;
+          text-transform: uppercase;
+        }
+      </style>
+      <!-- header -->
+      <header>
+	<a href="/">
+		<h3>Ngoc-Truong Nguyen</h3>
+	</a>
+</header>
+
+      <!-- nav -->
+      <nav>
+	
+		
+			<a href="/">Home</a>
+		
+	
+		
+			<a href="/">Blog</a>
+		
+	
+		
+			<a href="/hackthebox/">MachinesHTB</a>
+		
+	
+		
+			<a href="/research/">Research</a>
+		
+	
+		
+			<a href="/">Project</a>
+		
+	
+		
+			<a href="/about">About</a>
+		
+	
+</nav>
+      <!-- page content -->
+      <main class="content">
+        <div class="article-header">
+          <h1 class="article-title">[Tutorial] Instructions for installing and using TabSurvey to run baseline models on new dataset.</h1>
+          <small class="date">24 Oct 2023</small>
+          <div class="categories">
+            
+          </div>
+        </div>
+        <p>In this guide, we will install and use TabSurvey to create a baseline for testing the performance of various models on your dataset.</p>
+
+<p><strong>Note:</strong> This tutorial assumes that you are working on a machine with a graphics card and have installed the appropriate CUDA driver to enable GPU usage.
+Overview of the steps we will cover:</p>
+<ul>
+  <li>Environment Setup</li>
+  <li>Verification of Operation</li>
+  <li>Adding a Dataset</li>
+</ul>
+
+<p>In this guide, we will not install Docker as described in the original author’s Git repository due to changes in library packages, which would require modifications to the Dockerfile. Additionally, for our specific use of TabSurvey, creating multiple environments and a Docker container to install Miniconda3 is unnecessary. Another reason is that we can use an existing IEC server with Conda, so we only need to set up the appropriate Python environment, making it easy to clone and edit code between the IEC server and your local machine.</p>
+
+<h2 id="i-environment-setup">I. Environment Setup</h2>
+<h3 id="install-conda">Install Conda</h3>
+<p>Install Miniconda3 on your LOCAL machine. You can refer to the official installation guide at: https://docs.conda.io/projects/miniconda/en/latest/#quick-command-line-install</p>
+
+<ul>
+  <li>On WINDOWS, open the Command Prompt (CMD) and execute the following commands:
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">curl</span> <span class="kd">https</span>://repo.anaconda.com/miniconda/Miniconda3<span class="na">-latest-Windows-x</span><span class="m">86</span>_64.exe <span class="na">-o </span><span class="kd">miniconda</span><span class="err">.exe</span>
+<span class="nb">start</span> <span class="na">/wait </span><span class="s2">""</span> <span class="kd">miniconda</span><span class="err">.exe</span> <span class="na">/S
+</span><span class="nb">del</span> <span class="kd">miniconda</span><span class="err">.exe</span>
+</code></pre></div>    </div>
+    <p>After the installation, you can check and find the “Anaconda Prompt (Miniconda3)” program in the Start menu.</p>
+  </li>
+  <li>On LINUX or WSL2, open a terminal and execute the following commands to install Miniconda3:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh <span class="nt">-O</span> ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh <span class="nt">-b</span> <span class="nt">-u</span> <span class="nt">-p</span> ~/miniconda3
+<span class="nb">rm</span> <span class="nt">-rf</span> ~/miniconda3/miniconda.sh
+</code></pre></div>    </div>
+    <p>After installation, launch Miniconda with the following commands for bash and zsh shells:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="install-enviroment">Install enviroment</h3>
+<p>To install the Python 3.7 environment, since the original author of TabSurvey used the “tensorflow-gpu=1.15.0” package for GPU support, on WSL, we will install the “tensorflow-directml” package as an alternative (it supports Python 3.7 the best).</p>
+
+<p>To create the Python 3.7 environment, execute the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">--name</span> tabsurvey <span class="nv">python</span><span class="o">=</span>3.7
+conda activate tabsurvey
+</code></pre></div></div>
+
+<p>On the IEC server, you can directly create the Python 3.7 environment without the previous steps:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">--name</span> tabsurvey <span class="nv">python</span><span class="o">=</span>3.7
+<span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>conda shell.bash hook<span class="si">)</span><span class="s2">"</span>
+conda activate tabsurvey
+</code></pre></div></div>
+
+<p>After activating the environment with <code class="language-plaintext highlighter-rouge">conda activate</code>, you will clone the TabSurvey repository. Note that this repository is a fork that you fixed to suit your specific task:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ntruongn/TabSurvey.git
+<span class="nb">cd </span>TabSurvey
+</code></pre></div></div>
+
+<p>Finally, you will install some necessary libraries for TabSurvey.</p>
+<ul>
+  <li>WSL:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-r</span> requirements_wsl.txt
+</code></pre></div>    </div>
+  </li>
+  <li>Windows, Linux, IEC Server:
+    <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">pip</span> <span class="kd">install</span> <span class="na">-r </span><span class="kd">requirements</span>.txt
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="ii-verification-of-operation">II. Verification of Operation</h2>
+
+<p>To check if everything is running smoothly on Linux, use the following command in the terminal to run the test:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./testall.sh
+</code></pre></div></div>
+
+<p>For Windows, you can execute the following batch file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>testall.bat
+</code></pre></div></div>
+
+<h2 id="iii-adding-a-new-dataset-for-baseline-testing-in-tabsurvey">III. Adding a New Dataset for Baseline Testing in TabSurvey</h2>
+
+<p>After completing the installation, we will add our own dataset to TabSurvey. To add a new dataset, pay attention to two files:</p>
+
+<ol>
+  <li><strong>Config File</strong> with the <code class="language-plaintext highlighter-rouge">.yml</code> extension in the <code class="language-plaintext highlighter-rouge">config</code> directory.
+    <ul>
+      <li>Important information to specify includes:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">dataset</code>: The name of the dataset.</li>
+          <li><code class="language-plaintext highlighter-rouge">objective</code>: Binary, classification, or regression task.</li>
+          <li><code class="language-plaintext highlighter-rouge">direction</code>: Optimization direction (refer to the original article).</li>
+          <li><code class="language-plaintext highlighter-rouge">num_features</code>: Total number of features in the dataset.</li>
+          <li><code class="language-plaintext highlighter-rouge">num_classes</code>: Number of classes in a multi-class classification task. Set to 1 for binary classification or regression.</li>
+          <li><code class="language-plaintext highlighter-rouge">cat_idx</code>: List of indices of categorical features in the dataset (if any).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Modify load_data.py</strong>:
+    <ul>
+      <li>In the <code class="language-plaintext highlighter-rouge">load_data()</code> function of the <code class="language-plaintext highlighter-rouge">load_data.py</code> file, you need to add an <code class="language-plaintext highlighter-rouge">elif</code> statement to handle the case when <code class="language-plaintext highlighter-rouge">args.dataset</code> matches the name of the dataset you are adding.</li>
+      <li>Within this <code class="language-plaintext highlighter-rouge">elif</code> block, perform the following:
+        <ul>
+          <li>Load the dataset from a CSV file (your dataset) either from the cloud using <code class="language-plaintext highlighter-rouge">pd.read_csv("path/on/cloud.csv")</code> or by adding it from a ZIP file. Below is an example of handling data loading from a ZIP file (downloaded from the cloud and specified as a local path).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Setup Params</strong>:
+    <ul>
+      <li>As mentioned earlier, training requires specific parameters, which are obtained from the <code class="language-plaintext highlighter-rouge">best_params.yml</code> file if <code class="language-plaintext highlighter-rouge">--optimize_hyperparameters</code> is not used. To run with a new dataset, you should run this option and use the best_params in the output file to overwrite <code class="language-plaintext highlighter-rouge">best_params.yml</code>. Make sure to use a GPU, and note the GPU index in the dataset’s config file.</li>
+      <li>Modify the <code class="language-plaintext highlighter-rouge">python train</code> line in the <code class="language-plaintext highlighter-rouge">testall.sh</code> file to include the <code class="language-plaintext highlighter-rouge">--optimize_hyperparameters</code> and <code class="language-plaintext highlighter-rouge">--use_gpu</code> options. The line should look like this:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python train.py <span class="nt">--config</span> <span class="s2">"</span><span class="nv">$config</span><span class="s2">"</span> <span class="nt">--model_name</span> <span class="s2">"</span><span class="nv">$model</span><span class="s2">"</span> <span class="nt">--n_trials</span> <span class="nv">$N_TRIALS</span> <span class="nt">--epochs</span> <span class="nv">$EPOCHS</span> <span class="nt">--optimize_hyperparameters</span> <span class="nt">--use_gpu</span>
+</code></pre></div>        </div>
+      </li>
+      <li>You can review and execute the code in the following files:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">testall_optimize_gpu.bat</code> (on Windows)</li>
+          <li><code class="language-plaintext highlighter-rouge">testall_optimize_gpu.sh</code> (on Linux)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>After running these, the results will be stored in <code class="language-plaintext highlighter-rouge">"output/&lt;model_name&gt;/&lt;data_name&gt;/results.txt"</code>. You can then extract the results for reporting or create a new <code class="language-plaintext highlighter-rouge">best_params</code> file using the <code class="language-plaintext highlighter-rouge">get_best_params.py</code> script. Additionally, you can refer to the <code class="language-plaintext highlighter-rouge">get_report_f1.py</code> file to extract the necessary results for your specific task. The sample result for an F1 report extracted from this file is provided in your document.</p>
+
+<p>In summary, the above is a basic guide for installing TabSurvey and using it with your own dataset. You can write additional scripts to process the results returned in the <code class="language-plaintext highlighter-rouge">output.txt</code> file for each model on each dataset to extract the necessary reporting tables for your task.</p>
+
+      </main>
+      <!-- footer -->
+      <footer>
+	<p>
+		This is a bio of me.
+	</p>
+	<p>
+		&copy 2023 | Ngoc-Truong Nguyen
+	</p>
+</footer>
+<!-- <script src='/assets/js/site.js' id="pill_site_script" type='module'></script> -->
+    </div>
+    <section id="category-modal-bg"></section>
+    <section id="category-modal">
+      <h1 id="category-modal-title"></h1>
+      <section id="category-modal-content"></section>
+    </section>
+  </body>
+</html>

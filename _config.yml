@@ -1,0 +1,53 @@
+title: Ngoc-Truong Nguyen
+markdown: kramdown
+url: ""
+baseurl: ""
+
+# for atom feed
+author:
+  name: Ngoc-Truong Nguyen
+  email: 2k1.nguyenngoctruong@gmail.com
+
+plugins:
+  - jekyll-paginate
+  - jemoji
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+paginate_path: "/page:num/"
+
+paginate: 5
+
+collections_dir: all_collections
+collections:
+  posts:
+    output: true
+    layout: "post"
+    permalink: /posts/:categories/:year/:month/:day/:title/
+  hackthebox:
+    output: true
+    layout: "post"
+    permalink: /hackthebox/:categories/:year/:month/:day/:title/
+  research:
+    output: true
+    layout: "post"
+    permalink: /research/:categories/:year/:month/:day/:title/
+  projects:
+    output: true
+    layout: "post"
+    permalink: /projects/:categories/:year/:month/:day/:title/
+
+# defaults:
+#   - scope:
+#       path: "_hackthebox"
+#     values:
+#       layout: "hackthebox"
+#       permalink: /hackthebox/:categories/:year:month:day/:title/
+#   - scope:
+#       path: "_blogs"
+#     values:
+#       layout: "post"
+#       permalink: /posts/:categories/:year/:month/:day/:title/
+
+exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]

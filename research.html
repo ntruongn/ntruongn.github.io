@@ -1,0 +1,14 @@
+---
+title: Home
+layout: collections_layout
+---
+
+<ul>
+  {% for post in site.research %}
+    <li>
+      <h3><a href="{{site.baseurl}}{{post.url}}">{{ post.title }}</a></h3>
+      <p>{{ post.date | date: "%B %-d, %Y" }}</p>
+      <p>{{ post.excerpt }}</p>
+    </li>
+  {% endfor %}
+</ul>

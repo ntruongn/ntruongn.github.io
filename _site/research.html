@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ngoc-Truong Nguyen | Home</title>
+  <script src="https://kit.fontawesome.com/faef595a2d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/mark.css" />
+  <link rel="stylesheet" href="/assets/css/custom.css" />
+  <!-- PILL JS LOADER SYLE -->
+  <style>
+    #indicator {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      display: none;
+      background-color: #72b6b5;
+    }
+
+    .is-loading {
+      display: block;
+      animation: blink 1.5s linear infinite;
+    }
+
+    @keyframes blink {
+      from,
+      to {
+        background-color: #72b6b5;
+      }
+
+      50% {
+        background-color: #42b983;
+      }
+    }
+
+    #project-link {
+      display: block;
+      position: fixed;
+      padding: 8px;
+      top: 0;
+      right: 0;
+    }
+  </style>
+  <!-- PILL JS -->
+  <script src="/assets/js/pill.min.js"></script>
+  <script>
+    // this is for pill js as the normal link wont work
+    function openLink(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+</head>
+
+  <body>
+    <div id="indicator"></div>
+    <div id="page">
+      <style>
+        .title {
+          padding: 5%;
+          color: #101417;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          background: #f78e66;
+          display: grid;
+        }
+        .meta {
+          font-size: 0.7rem;
+          font-weight: normal;
+          text-transform: uppercase;
+        }
+      </style>
+      <!-- header -->
+      <header>
+	<a href="/">
+		<h3>Ngoc-Truong Nguyen</h3>
+	</a>
+</header>
+
+      <!-- nav -->
+      <nav>
+	
+		
+			<a href="/">Home</a>
+		
+	
+		
+			<a href="/">Blog</a>
+		
+	
+		
+			<a href="/hackthebox/">MachinesHTB</a>
+		
+	
+		
+			<a href="/research/">Research</a>
+		
+	
+		
+			<a href="/">Project</a>
+		
+	
+		
+			<a href="/about">About</a>
+		
+	
+</nav>
+      <!-- page content -->
+      <main class="post-list">
+        <!-- <p class="title">Home</p> -->
+        <ul>
+  
+    <li>
+      <h3><a href="/research/1963/08/28/i-have-a-dream/">I Have a Dream</a></h3>
+      <p>August 28, 1963</p>
+      <p><p>I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.</p>
+</p>
+    </li>
+  
+    <li>
+      <h3><a href="/research/2023/10/24/29-09-2023-installing-and-using-TabSurvey/">[Tutorial] Instructions for installing and using TabSurvey to run baseline models on new dataset.</a></h3>
+      <p>October 24, 2023</p>
+      <p><p>In this guide, we will install and use TabSurvey to create a baseline for testing the performance of various models on your dataset.</p>
+</p>
+    </li>
+  
+</ul>
+
+      </main>
+
+      <!-- footer -->
+      <footer>
+	<p>
+		This is a bio of me.
+	</p>
+	<p>
+		&copy 2023 | Ngoc-Truong Nguyen
+	</p>
+</footer>
+<!-- <script src='/assets/js/site.js' id="pill_site_script" type='module'></script> -->
+    </div>
+  </body>
+</html>
