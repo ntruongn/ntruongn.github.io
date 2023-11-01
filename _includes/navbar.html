@@ -1,13 +1,21 @@
 <div class="container">
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ site.url }}">Ngoc-Truong Nguyen /</a>
+            </li>
+        </ul>
+    </nav>
+    </div>
+
+<div class="container">
 <nav>
     <ul>
-        <li>$</li>
-        <li>
-            <a href="{{ site.url }}">Ngoc-Truong Nguyen /</a>
-        </li>
+        <li style="color: blue;"># </li>
+        <li>cd</li>
         {% if page.collection != nil %}
         <li>
-            <a href="{{ site.url }}">{{ page.collection }} / </a>
+            <!-- <a href="{{ site.url }}">{{ page.collection }} / </a> -->
         </li>
         {% endif %}
         <li>

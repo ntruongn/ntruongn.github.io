@@ -3,11 +3,11 @@ layout: page
 ---
 
 {% assign date_format = site.darkhack.date_format | default: "%x" %}
-<div>
+<div style="display: flex; align-items: center;">
     <p style="color: blue;">$ </p> cat 
-    <h1 style="color: chocolate;">{{ page.title }} </h1>
+    <h1 style="color: chocolate; margin: 0;">{{ page.title }}</h1>
 </div>
 
-<p>Updated on {{ page.date | default: site.time | date: date_format }}</p>
+<small>Updated on {{ page.date | default: site.time | date: date_format }}</small>
 
 {{ content }}
