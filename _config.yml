@@ -4,12 +4,12 @@ url: "https://ntruongn.github.io"
 baseurl: ""
 
 author:
-  name: root
-  email: root@sudo.net
+  name: Ngoc-Truong Nguyen
+  email: 2k1.nguyenngoctruong@gmail.com
   twitter: daulpavid
   mastodon_instance: infosec.exchange
   mastodon_handle: daulpavid
-  github: daulpavid
+  github: ntruongn
   linkedin: daulpavid
 description:
   Bullshit goes here.
@@ -24,4 +24,8 @@ theme: darkhack
 
 collections:
   disclosures:
+    output: true
+  researchs:
+    output: true
+  yet_another_collection:
     output: true

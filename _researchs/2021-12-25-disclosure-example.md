@@ -1,5 +1,5 @@
 ---
-collection: disclosures
+collection: researchs
 title: Exploit Example
 layout: disclosure
 type: code

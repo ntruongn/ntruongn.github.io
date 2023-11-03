@@ -43,4 +43,19 @@
     {% if font_awesome != nil %}
     <script src="https://kit.fontawesome.com/{{ font_awesome }}.js" crossorigin="anonymous"></script>
     {% endif %}
+    <style>       
+        div.container nav.nav ul li {
+            display: inline;
+            margin-right: 20px; /* Khoảng cách giữa các mục */
+        }
+        div.container nav.nav ul li a {
+            text-decoration: none;
+            color: #fff; /* Màu văn bản */
+            font-weight: bold;
+        }
+        
+        div.container nav.nav ul li a:hover {
+            color: #00FF00; /* Màu văn bản khi di chuột qua */
+        }
+    </style>
 </head>
