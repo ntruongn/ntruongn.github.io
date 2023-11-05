@@ -29,20 +29,24 @@ body {
     background-color: $background-color;
     color: $text-color;
     font-family: $font-family;
-    font-size: $font-size;
+    font-size: 1.3em;
+    // $font-size;
 
     h1 {
-        font-size: $h1-size;
+        // font-size: $h1-size;
+        color: olive;
         font-weight: bold;
     }
 
     h2 {
-        font-size: $h2-size;
+        // font-size: $h2-size;
+        color: olive;
         font-weight: bold;
     }
 
     h3 {
-        font-size: $h2-size;
+        // font-size: $h2-size;
+        color: blueviolet;
         font-weight: bold;
     }
 
@@ -54,6 +58,19 @@ body {
         max-width: 95%;
         overflow: hidden;
     }
+}
+div.container nav.nav ul li {
+    display: inline;
+    margin-right: 20px; /* Khoảng cách giữa các mục */
+}
+div.container nav.nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Màu văn bản */
+    font-weight: bold;
+}
+
+div.container nav.nav ul li a:hover {
+    color: #00FF00; /* Màu văn bản khi di chuột qua */
 }
 
 mjx-container {
