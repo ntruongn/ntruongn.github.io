@@ -23,19 +23,28 @@
 </style>
 </head>
 <body>
-<div class="container text-center mt-4" style="font-size: 18px">
-  <p id="score"></p>
-</div>
-<div class="container text-center mt-4">
-  <button class="btn btn-success mx-2" id="prevQuestion">Câu hỏi trước đó</button>
-  <button class="btn btn-success mx-2" id="nextQuestion">Câu hỏi tiếp theo</button>
-  <button class="btn btn-danger mx-2" id="retryIncorrectQuestions">Làm lại câu sai</button>
-</div>
-<div id="container" class="container mt-4">
-  <p id="question"></p>
-  <div id="answerOptions"></div>
-  <p id="result"></p>
-</div>
+  <div class="container text-center mt-4" style="font-size: 24px">
+    <p id="score"></p>
+  </div>
+  <div class="container text-center mt-4">
+    <div class="row">
+      <div class="col-12 col-md-4 mb-2">
+        <button class="btn btn-success w-100" id="prevQuestion" style="font-size: 24px">Câu hỏi trước đó</button>
+      </div>
+      <div class="col-12 col-md-4 mb-2">
+        <button class="btn btn-success w-100" id="nextQuestion" style="font-size: 24px">Câu hỏi tiếp theo</button>
+      </div>
+      <div class="col-12 col-md-4 mb-2">
+        <button class="btn btn-danger w-100" id="retryIncorrectQuestions" style="font-size: 24px">Làm lại câu sai</button>
+      </div>
+    </div>
+  </div>
+  <div id="container conten" class="container mt-4" style="font-size: 24px">
+    <p id="question"></p>
+    <div id="answerOptions"></div>
+    <p id="result"></p>
+  </div>
+  
 
 <script>
   let userInput = prompt("ĐANG LÀM ĐỀ ETS2023! - HÃY NHẬP TEST MUỐN LÀM:", 1);
