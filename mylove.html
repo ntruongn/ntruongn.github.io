@@ -3,8 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Canvas Animated Heart Effect</title>
-        <!-- <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script> -->
         <style>
             canvas {
                 position: absolute;
@@ -13,6 +11,16 @@
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0,0,0,.2);
+            }
+            .info {
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-family: 'Allura', cursive;
+                font-size: 24px;
+                text-align: center;
             }
         </style>
         <script>
@@ -51,7 +59,6 @@
                 ctx.fillRect(0, 0, width, height);
                 
                 var heartPosition = function (rad) {
-                    //return [Math.sin(rad), Math.cos(rad)];
                     return [Math.pow(Math.sin(rad), 3), -(15 * Math.cos(rad) - 5 * Math.cos(2 * rad) - 2 * Math.cos(3 * rad) - Math.cos(4 * rad))];
                 };
                 var scaleAndTranslate = function (pos, sx, sy, dx, dy) {
@@ -164,7 +171,6 @@
                         hour = minute * 60,
                         day = hour * 24;
                     const countDown = new Date("2/14/2020 19:00:00").getTime();
-                    // const countDown = new Date("2/17/2020 14:47:00").getTime();
                     const now = new Date().getTime(), distance = now - countDown;
                     msg = Math.floor(distance / (day)) + " ngày " 
                             + Math.floor((distance % (day)) / (hour)) + " giờ "
@@ -174,6 +180,35 @@
                     window.requestAnimationFrame(loop, canvas);
                 };
                 loop();
+
+                // Calculate and display additional information
+                var displayInfo = function() {
+                    var now = new Date();
+                    var events = [
+                        { date: new Date(now.getFullYear(), 1, 10), description: "Kỷ niệm ngày sinh nhật Gạo" },
+                        { date: new Date(now.getFullYear(), 1, 14), description: "Kỷ niệm ngày Lễ tình nhân" },
+                        { date: new Date(now.getFullYear(), 2, 8), description: "Kỷ niệm ngày Quốc tế Phụ nữ" },
+                        { date: new Date(now.getFullYear(), 6, 14), description: "Kỷ niệm ngày sinh nhật Mọt" },
+                        { date: new Date(now.getFullYear(), 9, 20), description: "Kỷ niệm ngày 20/10" }
+                    ];
+                    var nextEvent = events.find(event => event.date > now);
+                    if (!nextEvent) {
+                        nextEvent = { date: new Date(now.getFullYear() + 1, 1, 10), description: "Ngày lễ 10/2" };
+                    }
+                    var daysUntilNextEvent = Math.ceil((nextEvent.date - now) / (1000 * 60 * 60 * 24));
+
+                    var startDate = new Date("2/14/2020");
+                    var daysInLove = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+                    var nextMilestone = Math.ceil(daysInLove / 100) * 100;
+                    var daysUntilNextMilestone = nextMilestone - daysInLove;
+
+                    document.getElementById('next-event').innerText = `Còn ${daysUntilNextEvent} ngày nữa - ${nextEvent.description} (${nextEvent.date.toLocaleDateString()})`;
+                    document.getElementById('next-milestone').innerText = `Còn ${daysUntilNextMilestone} ngày nữa - Kỉ niệm ${nextMilestone} ngày yêu nhau (${new Date(startDate.getTime() + nextMilestone * 24 * 60 * 60 * 1000).toLocaleDateString()})`;
+                    document.getElementById('days-in-love').innerText = `Gạo-Mọt đã yêu nhau được ${daysInLove} ngày`;
+                };
+
+                displayInfo();
+                setInterval(displayInfo, 1000 * 60 * 60); // Update every hour
             };
 
             var s = document.readyState;
@@ -185,6 +220,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     </head>
     <body data-rsssl=1>
-        <canvas id="heart"></canvas>	
+        <canvas id="heart"></canvas>
+        <div class="info">
+            <div id="next-event"></div>
+            <div id="next-milestone"></div>
+            <div id="days-in-love"></div>
+        </div>
     </body>   
-</html>   
+</html>
